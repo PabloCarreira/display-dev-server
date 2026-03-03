@@ -2,7 +2,7 @@
 
 const displayDevServer = require('../src/index');
 // const jsonParseDeep = require('./src/util/jsonParseDeep');
-const program = require('commander');
+const { program } = require('commander');
 const chalk = require('chalk');
 const packageJson = require('../package.json');
 const base64 = require("../src/util/base64");
