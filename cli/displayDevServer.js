@@ -12,7 +12,7 @@ console.log(`Welcome to the ${chalk.green.bold(`Display.Monks Development Server
 program
   .version(packageJson.version)
   .option('-g, --glob <data>', 'Globbing pattern like "-p ./src/**/.richmediarc"', "./**/.richmediarc*")
-  .option('-ss, --stats', 'Show stats when building')
+  .option('-s, --stats', 'Show stats when building')
   .option('-c, --choices <data>', 'predetermined settings')
   .option('-m, --mode <data>', 'development or production', 'development')
   .option('-o, --outputDir <data>', 'output dir', './build')
