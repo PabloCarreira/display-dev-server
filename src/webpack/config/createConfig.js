@@ -227,10 +227,7 @@ module.exports = function createConfig({
                         "postcss-preset-env",
                         {
                           stage: 2,
-                          features: {
-                            "nesting-rules": true,
-                          },
-                          browsers: browserCompiler,
+                          overrideBrowserslist: browserCompiler,
                         },
                       ],
                       ["postcss-nested"],

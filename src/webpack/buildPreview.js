@@ -290,6 +290,6 @@ function getVideoDimensions(file) {
 
 async function getImageDimensions(file) {
   const data = await fs.readFile(file)
-  const { width, height } = imageSize(data)
+  const { width, height } = await imageSize(data)
   return { width, height }
 }
