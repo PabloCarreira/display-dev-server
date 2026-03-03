@@ -1,7 +1,7 @@
-const sharp = require('sharp');
-const path = require('path');
+import sharp from 'sharp';
+import path from 'path';
 
-module.exports = async function (content, map, meta) {
+export default async function (content, map, meta) {
   const callback = this.async();
   const options = this.getOptions();
 
@@ -25,4 +25,4 @@ module.exports = async function (content, map, meta) {
   callback(null, optimized);
 };
 
-module.exports.raw = true;
+export const raw = true;

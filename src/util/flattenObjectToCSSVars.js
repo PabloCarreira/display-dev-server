@@ -1,5 +1,5 @@
-const leafs = require('./leafs');
-const isFile = require('./isFile');
+import leafs from './leafs.js';
+import isFile from './isFile.js';
 
 function flattenObjectToCSSVars(obj) {
   const result = {};
@@ -17,4 +17,4 @@ function flattenObjectToCSSVars(obj) {
   return result;
 }
 
-module.exports = flattenObjectToCSSVars;
+export default flattenObjectToCSSVars;

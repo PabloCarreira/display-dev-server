@@ -1,17 +1,16 @@
-const chalk = require("chalk");
-const fs = require("fs-extra");
-const globPromise = require("glob-promise");
-const Spinner = require("cli-spinner").Spinner;
-const inquirer = require("inquirer");
-const path = require("path");
+import chalk from 'chalk';
+import fs from 'fs-extra';
+import globPromise from 'glob-promise';
+import { Spinner } from 'cli-spinner';
+import inquirer from 'inquirer';
+import path from 'path';
+import createConfigByRichmediarcList from './config/createConfigByRichmediarcList.js';
+import saveChoicesInPackageJson from '../util/saveChoicesInPackageJson.js';
+import findRichmediaRC from '../util/findRichmediaRC.js';
+import parsePlaceholdersInObject from '../util/parsePlaceholdersInObject.js';
+import expandWithSpreadsheetData from '../util/expandWithSpreadsheetData.js';
 
-const createConfigByRichmediarcList = require("./config/createConfigByRichmediarcList");
-const saveChoicesInPackageJson = require("../util/saveChoicesInPackageJson");
-const findRichmediaRC = require("../util/findRichmediaRC");
-const parsePlaceholdersInObject = require("../util/parsePlaceholdersInObject");
-const expandWithSpreadsheetData = require("../util/expandWithSpreadsheetData");
-
-module.exports = async function (options) {
+export default async function (options) {
   const start = Date.now()
 
   // {mode = "development", glob = "./**/.richmediarc*", choices = null, stats = null, outputDir = "./build", configOverride = {}}

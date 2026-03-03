@@ -1,13 +1,13 @@
 /* eslint no-param-reassign: 0 */
 /* eslint class-methods-use-this: 0 */
 
-const fs = require('fs-extra');
-const path = require('path');
-const md5File = require('md5-file');
-const isExternalURL = require('../../util/isExternalURL');
-const getRichmediaRC = require('../../util/getRichmediaRC');
-const isFile = require('../../util/isFile');
-const leafs = require('../../util/leafs');
+import fs from 'fs-extra';
+import path from 'path';
+import md5File from 'md5-file';
+import isExternalURL from '../../util/isExternalURL.js';
+import getRichmediaRC from '../../util/getRichmediaRC.js';
+import isFile from '../../util/isFile.js';
+import leafs from '../../util/leafs.js';
 
 class RichmediaRCPlugin {
   constructor(options) {
@@ -60,4 +60,4 @@ class RichmediaRCPlugin {
   }
 }
 
-module.exports = RichmediaRCPlugin;
+export default RichmediaRCPlugin;

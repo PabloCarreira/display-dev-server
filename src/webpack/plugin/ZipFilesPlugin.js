@@ -1,10 +1,10 @@
 'use strict';
 
-const fs = require('fs-extra');
-const path = require('path');
-const archiver = require('archiver')
+import fs from 'fs-extra';
+import path from 'path';
+import archiver from 'archiver';
 
-module.exports = class ZipFilesPlugin {
+export default class ZipFilesPlugin {
   constructor(options) {
     this.options = options;
   }

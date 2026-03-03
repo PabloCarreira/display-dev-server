@@ -1,4 +1,4 @@
-const leafs = require('./leafs');
+import leafs from './leafs.js';
 
 /**
  *
@@ -6,7 +6,7 @@ const leafs = require('./leafs');
  * @param {object} richmediarc
  * @param options
  */
-module.exports = function resolveRichmediaRCPathsToWebpackPaths(
+export default function resolveRichmediaRCPathsToWebpackPaths(
   compilation,
   richmediarc,
   options = {},

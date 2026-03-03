@@ -2,7 +2,7 @@
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Gajus Kuizinas @gajus
 */
-const Ajv = require('ajv');
+import Ajv from 'ajv';
 const ajv = new Ajv({
   errorDataPath: 'configuration',
   allErrors: true,
@@ -62,4 +62,4 @@ const filterErrors = errors => {
   return newErrors;
 };
 
-module.exports = validateSchema;
+export default validateSchema;

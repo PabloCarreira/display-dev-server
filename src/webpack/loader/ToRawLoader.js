@@ -1,13 +1,11 @@
-const loaderUtils = require('loader-utils');
-const isExternalURL = require('../../util/isExternalURL');
-const getRichmediaRC = require('../../util/getRichmediaRC');
-const leafs = require('../../util/leafs');
-const isFile = require('../../util/isFile');
-const fs = require('fs');
-const parse5 = require('parse5');
+import isExternalURL from '../../util/isExternalURL.js';
+import getRichmediaRC from '../../util/getRichmediaRC.js';
+import leafs from '../../util/leafs.js';
+import isFile from '../../util/isFile.js';
+import fs from 'fs';
+import * as parse5 from 'parse5';
 
-
-module.exports = function ConvertHandlebarsOutputToHtmlLoader(content, sourceMap) {
+export default function ConvertHandlebarsOutputToHtmlLoader(content, sourceMap) {
   const callback = this.async();
 
   // function searchForProperty(model, name, arrpath = [], maxNesting = 5){

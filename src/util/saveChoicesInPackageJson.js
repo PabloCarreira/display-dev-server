@@ -1,10 +1,10 @@
-const {prompt} = require('inquirer');
-const path = require('path');
-const fs = require('fs');
-const chalk = require('chalk');
-const base64 = require('./base64');
+import inquirer from 'inquirer';
+import path from 'path';
+import fs from 'fs';
+import chalk from 'chalk';
+import * as base64 from './base64.js';
 
-module.exports = async function saveChoicesInPackageJson(type, {glob, choices, stats}) {
+export default async function saveChoicesInPackageJson(type, {glob, choices, stats}) {
   if (!type || (type !== 'dev' && type !== 'build')) {
     throw new Error('type is not set or not of value dev or build.');
   }
@@ -13,7 +13,7 @@ module.exports = async function saveChoicesInPackageJson(type, {glob, choices, s
     throw new Error('glob is not set.');
   }
 
-  let result = await prompt({
+  let result = await inquirer.prompt({
     type: 'confirm',
     name: 'saveSettings',
     default: false,
@@ -22,10 +22,10 @@ module.exports = async function saveChoicesInPackageJson(type, {glob, choices, s
 
   if (result.saveSettings) {
     const packageJsonFilepath = path.resolve(process.cwd(), './package.json');
-    let packageJson = require(packageJsonFilepath);
+    let packageJson = JSON.parse(fs.readFileSync(packageJsonFilepath, 'utf-8'));
     const {scripts} = packageJson;
 
-    result = await prompt({
+    result = await inquirer.prompt({
       type: 'input',
       name: 'name',
       message: `please provide a name for your command. You will type something like npm run ${type}:__NAME__

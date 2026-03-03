@@ -43,4 +43,4 @@ function parsePlaceholders(source, model) {
   });
 }
 
-module.exports = parsePlaceholders;
+export default parsePlaceholders;

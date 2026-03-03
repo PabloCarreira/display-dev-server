@@ -1,10 +1,11 @@
-const path = require("path");
-const removeTempRichmediaRc = require("../util/removeTempRichmediaRc");
-const cliProgress = require("cli-progress");
-const chalk = require("chalk");
-const workerFarm = require('worker-farm');
+import path from 'path';
+import removeTempRichmediaRc from '../util/removeTempRichmediaRc.js';
+import cliProgress from 'cli-progress';
+import chalk from 'chalk';
+import workerFarm from 'worker-farm';
+import { fileURLToPath } from 'url';
 
-module.exports = async function buildFiles(result, options) {
+export default async function buildFiles(result, options) {
   const start = Date.now();
 
   const webpackRun = workerFarm(
@@ -14,7 +15,7 @@ module.exports = async function buildFiles(result, options) {
       maxConcurrentCallsPerWorker: 1,
       maxConcurrentWorkers: options.parallel === true ? 4 : options.parallel
     },
-    require.resolve('./webpackRun')
+    fileURLToPath(new URL('./webpackRun.cjs', import.meta.url))
   );
   
   const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);

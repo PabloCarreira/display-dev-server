@@ -1,8 +1,11 @@
-const vm = require('node:vm');
-const path = require('path');
-const resolve = require('resolve')
-const btoa = require('btoa')
-const babel = require('@babel/core');
+import vm from 'node:vm';
+import path from 'path';
+import resolve from 'resolve';
+import btoa from 'btoa';
+import babel from '@babel/core';
+import { createRequire } from 'module';
+
+const _require = createRequire(import.meta.url);
 
 /**
  * @typedef {Object} LoaderContext
@@ -98,7 +101,7 @@ function evalDependencyGraph({loaderContext, src, filename, publicPath = ""}) {
             babelrc: false,
             presets: [
                 [
-                    require("@babel/preset-env"), {
+                    _require("@babel/preset-env"), {
                         modules: "commonjs",
                         // targets: {nodejs: "current"},
                         targets: {
@@ -107,7 +110,7 @@ function evalDependencyGraph({loaderContext, src, filename, publicPath = ""}) {
                     },
                 ],
             ],
-            plugins: [require("babel-plugin-add-module-exports")],
+            plugins: [_require("babel-plugin-add-module-exports")],
         }).code;
 
         const script = new vm.Script(src, {
@@ -143,7 +146,7 @@ function evalDependencyGraph({loaderContext, src, filename, publicPath = ""}) {
                     // Other dependencies are automatically added by loadModule() below
                     loaderContext.addDependency(absolutePath);
 
-                    const exports = require(absolutePath); // eslint-disable-line import/no-dynamic-require
+                    const exports = _require(absolutePath); // eslint-disable-line import/no-dynamic-require
 
                     moduleCache.set(absolutePath, exports);
 
@@ -224,5 +227,5 @@ function getPublicPath(options, context) {
 /* eslint-enable complexity */
 
 // For CommonJS interoperability
-module.exports = extractLoader;
+export default extractLoader;
 // export default extractLoader;

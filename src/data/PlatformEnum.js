@@ -1,4 +1,2 @@
-module.exports = {
-  MONET: 'monet',
-  DOUBLECLICK: 'doubleclick',
-};
+export const MONET = 'monet';
+export const DOUBLECLICK = 'doubleclick';

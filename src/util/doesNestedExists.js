@@ -17,4 +17,4 @@ function doesNestedExist(obj, pattern) {
   return true;
 }
 
-module.exports = doesNestedExist;
+export default doesNestedExist;

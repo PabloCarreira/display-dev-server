@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
-module.exports = class WriteFilePlugin {
+export default class WriteFilePlugin {
   constructor(options) {
     if (!options) {
       throw new Error(`Please provide 'options' for the WriteFilePlugin config`);

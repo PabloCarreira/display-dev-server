@@ -1,20 +1,19 @@
-const path = require('path');
-const fs = require('fs-extra');
-const express = require('express');
-const portfinder = require('portfinder');
-const util = require('util');
-const chalk = require('chalk');
-const open = require('open');
-const cliProgress = require("cli-progress");
-
-const extendObject = require('../util/extendObject');
-const createObjectFromJSONPath = require('../util/createObjectFromJSONPath');
-const getDataFromGoogleSpreadsheet = require('../util/getDataFromGoogleSpreadsheet');
-const removeTempRichmediaRcSync = require('../util/removeTempRichmediaRcSync');
-
-const getNameFromLocation = require('../util/getNameFromLocation');
-
-const workerFarm = require('worker-farm');
+import path from 'path';
+import fs from 'fs-extra';
+import express from 'express';
+import portfinder from 'portfinder';
+import util from 'util';
+import chalk from 'chalk';
+import open from 'open';
+import cliProgress from 'cli-progress';
+import extendObject from '../util/extendObject.js';
+import createObjectFromJSONPath from '../util/createObjectFromJSONPath.js';
+import getDataFromGoogleSpreadsheet from '../util/getDataFromGoogleSpreadsheet.js';
+import removeTempRichmediaRcSync from '../util/removeTempRichmediaRcSync.js';
+import getNameFromLocation from '../util/getNameFromLocation.js';
+import workerFarm from 'worker-farm';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  *
@@ -22,7 +21,7 @@ const workerFarm = require('worker-farm');
  * @param {boolean} openLocation
  * @param {{}} options
  */
-module.exports = async function devServer(configs, openLocation = true, options) {
+export default async function devServer(configs, openLocation = true, options) {
   const start = Date.now()
 
   const N_SUBSERVERS = options.parallel === true ? 4 : options.parallel
@@ -47,7 +46,7 @@ module.exports = async function devServer(configs, openLocation = true, options)
         })
       }
     },
-    require.resolve('./devSubServer')
+    fileURLToPath(new URL('./devSubServer.cjs', import.meta.url))
   );
 
   const httpLocation = `http://localhost:${port}`;

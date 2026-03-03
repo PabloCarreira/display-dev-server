@@ -1,6 +1,6 @@
-const fs = require('fs-extra');
+import fs from 'fs-extra';
 
-module.exports = async function removeTempRichmediaRc(configs) {
+export default async function removeTempRichmediaRc(configs) {
   await Promise.all(
     configs.map(async config => {
       if (!config.settings.willBeDeletedAfterServerCloses) {

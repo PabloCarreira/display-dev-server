@@ -1,29 +1,29 @@
-const path = require('path');
-const fs = require('fs-extra');
-const webpack = require('webpack');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const express = require('express');
-// const handlebars = require('handlebars');
-const portfinder = require('portfinder');
-const util = require('util');
-const chalk = require('chalk');
-const open = require('open');
-const cliProgress = require("cli-progress");
-
-const extendObject = require('../util/extendObject');
-const createObjectFromJSONPath = require('../util/createObjectFromJSONPath');
-const getDataFromGoogleSpreadsheet = require('../util/getDataFromGoogleSpreadsheet');
-const removeTempRichmediaRcSync = require('../util/removeTempRichmediaRcSync');
-
-const getNameFromLocation = require('../util/getNameFromLocation');
+import path from 'path';
+import fs from 'fs-extra';
+import webpack from 'webpack';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import express from 'express';
+// import handlebars from 'handlebars';
+import portfinder from 'portfinder';
+import util from 'util';
+import chalk from 'chalk';
+import open from 'open';
+import cliProgress from 'cli-progress';
+import extendObject from '../util/extendObject.js';
+import createObjectFromJSONPath from '../util/createObjectFromJSONPath.js';
+import getDataFromGoogleSpreadsheet from '../util/getDataFromGoogleSpreadsheet.js';
+import removeTempRichmediaRcSync from '../util/removeTempRichmediaRcSync.js';
+import getNameFromLocation from '../util/getNameFromLocation.js';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  *
  * @param {Array<{webpack: *, settings: {location, data}}>} configs
  * @param {boolean} openLocation
  */
-module.exports = async function devServer(configs, openLocation = true) {
+export default async function devServer(configs, openLocation = true) {
   const start = Date.now()
 
   const webpackConfigList = configs.map(({ webpack }) => webpack);

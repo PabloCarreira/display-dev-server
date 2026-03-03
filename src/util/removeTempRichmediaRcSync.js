@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-module.exports = function removeTempRichmediaRc(configs) {
+export default function removeTempRichmediaRc(configs) {
   configs.forEach(config => {
     if (!config.settings.willBeDeletedAfterServerCloses) {
       return

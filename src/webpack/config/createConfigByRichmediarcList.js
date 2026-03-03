@@ -1,14 +1,15 @@
-const path = require('path');
-const fs = require('fs-extra');
-const Ajv = require('ajv');
-const draft07 = require('ajv/lib/refs/json-schema-draft-07.json');
+import path from 'path';
+import fs from 'fs-extra';
+import Ajv from 'ajv';
+import { createRequire } from 'module';
+import { pathToFileURL } from 'url';
+import createConfig from './createConfig.js';
+import isGoogleSpreadsheetUrl from '../../util/isGoogleSpreadsheetUrl.js';
+import getNameFromLocation from '../../util/getNameFromLocation.js';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-const createConfig = require('./createConfig');
-const isGoogleSpreadsheetUrl = require('../../util/isGoogleSpreadsheetUrl');
-const getNameFromLocation = require('../../util/getNameFromLocation');
-const {GoogleSpreadsheet} = require('google-spreadsheet');
-
-const schema = require('../../schema/richmediarc.schema.json');
+const _require = createRequire(import.meta.url);
+const schema = _require('../../schema/richmediarc.schema.json');
 
 /**
  *
@@ -81,10 +82,11 @@ async function createConfigByRichmediarcList(richmediarcList, {mode, stats, outp
       const webpackFilepath = path.resolve(`${path.dirname(location)}/webpack.config.js`);
 
       // check if webpackconfig exists
-      return fs.pathExists(webpackFilepath).then(exists => {
+      return fs.pathExists(webpackFilepath).then(async exists => {
         if (exists) {
           // eslint-disable-next-line
-          const webpack = require(webpackFilepath);
+          const webpackModule = await import(pathToFileURL(webpackFilepath).href);
+          const webpack = webpackModule.default ?? webpackModule;
 
           if (typeof webpack === 'function') {
             return webpack(webpackConfig);
@@ -104,4 +106,4 @@ async function createConfigByRichmediarcList(richmediarcList, {mode, stats, outp
   return webpackConfigs.filter(config => !!config);
 }
 
-module.exports = createConfigByRichmediarcList;
+export default createConfigByRichmediarcList;

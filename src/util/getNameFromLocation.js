@@ -1,6 +1,6 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = function getNameFromLocation(location) {
+export default function getNameFromLocation(location) {
   let list = location.split('/');
 
   list = list

@@ -1,10 +1,9 @@
-// const loaderUtils = require('loader-utils');
-const leafs = require("../../util/leafs");
-const isFile = require("../../util/isFile");
-const pathModule = require("path");
-const fs = require("fs-extra");
+import leafs from '../../util/leafs.js';
+import isFile from '../../util/isFile.js';
+import pathModule from 'path';
+import fs from 'fs-extra';
 
-module.exports = function customLoader(content) {
+export default function customLoader(content) {
   const callback = this.async();
   const options = this.getOptions();
   const replacementString = "'webpackWillReplaceThisWithConfig'";

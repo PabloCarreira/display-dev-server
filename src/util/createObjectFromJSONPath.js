@@ -14,4 +14,4 @@ function createObjectFromJSONPath(key, value) {
     return result;
 }
 
-module.exports = createObjectFromJSONPath;
+export default createObjectFromJSONPath;

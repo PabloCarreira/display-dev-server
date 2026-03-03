@@ -3,13 +3,12 @@
 /* eslint no-loop-func: 0 */
 /* eslint no-shadow: 0 */
 
-const fs = require('fs-extra');
-const path = require('path');
-const deepmerge = require('deepmerge');
-const leafs = require('./leafs');
-const isFile = require('./isFile');
-const isExternalURL = require("./isExternalURL");
-const { readJson } = require('fs-extra');
+import fs from 'fs-extra';
+import path from 'path';
+import deepmerge from 'deepmerge';
+import leafs from './leafs.js';
+import isFile from './isFile.js';
+import isExternalURL from './isExternalURL.js';
 
 /**
  * getJSONConfig retrieves a jsonConfig config file and will
@@ -19,7 +18,7 @@ const { readJson } = require('fs-extra');
  * @param {function} onDependecy
  * @return {Promise<void | never>}
  */
-module.exports = function getRichmediaRCSync(filepath, onDependecy = () => {}) {
+export default function getRichmediaRCSync(filepath, onDependecy = () => {}) {
   filepath = path.resolve(filepath);
   onDependecy(filepath);
   const dirname = path.dirname(filepath);

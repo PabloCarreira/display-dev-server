@@ -1,10 +1,10 @@
-const path = require("path");
-const chalk = require("chalk");
-const webpack = require("webpack");
-const cliProgress = require("cli-progress");
-const removeTempRichmediaRc = require("../util/removeTempRichmediaRc");
+import path from 'path';
+import chalk from 'chalk';
+import webpack from 'webpack';
+import cliProgress from 'cli-progress';
+import removeTempRichmediaRc from '../util/removeTempRichmediaRc.js';
 
-module.exports = async function buildFiles(result, outputDir, chunkSize = 10) {
+export default async function buildFiles(result, outputDir, chunkSize = 10) {
   const start = Date.now();
 
   const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);

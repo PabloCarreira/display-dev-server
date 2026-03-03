@@ -24,4 +24,4 @@ function leafs(source, fn, maxNesting = 10, path = []) {
   }
 }
 
-module.exports = leafs;
+export default leafs;

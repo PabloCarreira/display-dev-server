@@ -1,9 +1,14 @@
-const webpack = require('webpack')
-const chalk = require('chalk')
-
-const createConfigByRichmediarcList = require('./config/createConfigByRichmediarcList')
-
+// webpackRun.cjs — MUST stay CommonJS (used by worker-farm via child_process.fork)
 module.exports = async function ({ config, options }, cb) {
+  const [
+    { default: webpack },
+    { default: chalk },
+    { default: createConfigByRichmediarcList },
+  ] = await Promise.all([
+    import('webpack'),
+    import('chalk'),
+    import('./config/createConfigByRichmediarcList.js'),
+  ]);
 
   const webpackConfig = await createConfigByRichmediarcList([config], options);
 

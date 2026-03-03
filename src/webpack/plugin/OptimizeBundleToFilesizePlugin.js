@@ -1,12 +1,12 @@
 'use strict';
 
-const fs = require('fs-extra');
-const path = require('path');
-const archiver = require('archiver')
-const sharp = require('sharp');
-const chalk = require('chalk');
+import fs from 'fs-extra';
+import path from 'path';
+import archiver from 'archiver';
+import sharp from 'sharp';
+import chalk from 'chalk';
 
-module.exports = class OptimizeBundleToFilesizePlugin {
+export default class OptimizeBundleToFilesizePlugin {
   constructor(options) {
     this.options = options;
   }

@@ -1,13 +1,12 @@
-const { OAuth2Client } = require('google-auth-library');
-const http = require('http');
-const url = require('url');
-const open = require('open');
-const fs = require('fs-extra');
-const destroyer = require('server-destroy');
-const inquirer = require('inquirer');
-const Filenames = require('../data/Filenames');
+import { OAuth2Client } from 'google-auth-library';
+import http from 'http';
+import open from 'open';
+import fs from 'fs-extra';
+import destroyer from 'server-destroy';
+import inquirer from 'inquirer';
+import * as Filenames from '../data/Filenames.js';
 
-module.exports = async function getOAuth2Client() {
+export default async function getOAuth2Client() {
   let data = {};
   const filepathRc = `./${Filenames.RC}`;
   const filepathGitIgnore = `./${Filenames.GITIGNORE}`;
@@ -69,7 +68,7 @@ module.exports = async function getOAuth2Client() {
           try {
             if (req.url.indexOf('/oauth2callback') > -1) {
               // acquire the code from the querystring, and close the web server.
-              const qs = new url.URL(req.url, 'http://localhost:3000')
+              const qs = new URL(req.url, 'http://localhost:3000')
                 .searchParams;
               const code = qs.get('code');
               console.log(`Code is ${code}`);

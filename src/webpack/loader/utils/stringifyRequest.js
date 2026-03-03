@@ -1,6 +1,4 @@
-'use strict';
-
-const path = require('path');
+import path from 'path';
 
 const matchRelativePath = /^\.\.?[/\\]/;
 
@@ -48,4 +46,4 @@ function stringifyRequest(loaderContext, request) {
   );
 }
 
-module.exports = stringifyRequest;
+export default stringifyRequest;

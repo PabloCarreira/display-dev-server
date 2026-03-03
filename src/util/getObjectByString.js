@@ -19,4 +19,4 @@ function getObjectByString(o, s) {
   return o;
 }
 
-module.exports = getObjectByString;
+export default getObjectByString;

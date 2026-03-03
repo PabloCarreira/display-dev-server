@@ -1,17 +1,16 @@
-// const loaderUtils = require('loader-utils');
-const isExternalURL = require('../../util/isExternalURL');
-const getRichmediaRC = require('../../util/getRichmediaRC');
-const leafs = require('../../util/leafs');
-const isFile = require('../../util/isFile');
-const path = require('path');
-const addConfigsAsWebpackDependencies = require('../../util/addConfigsAsWebpackDependencies');
-const stringifyRequest = require('./utils/stringifyRequest')
+import isExternalURL from '../../util/isExternalURL.js';
+import getRichmediaRC from '../../util/getRichmediaRC.js';
+import leafs from '../../util/leafs.js';
+import isFile from '../../util/isFile.js';
+import path from 'path';
+import addConfigsAsWebpackDependencies from '../../util/addConfigsAsWebpackDependencies.js';
+import stringifyRequest from './utils/stringifyRequest.js';
 
 /**
  * Allows you to import external files into a json value.
  * Can be used for any value, in an object or array.
  */
-module.exports = function RichmediaRCLoader(data) {
+export default function RichmediaRCLoader(data) {
   const callback = this.async();
   const options = this.getOptions();
   const loaderContext = this;

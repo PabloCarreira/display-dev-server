@@ -1,8 +1,2 @@
-module.exports = {
-  encode: str => {
-    return Buffer.from(str).toString('base64');
-  },
-  decode: str => {
-    return Buffer.from(str, 'base64').toString('utf8');
-  },
-};
+export const encode = str => Buffer.from(str).toString('base64');
+export const decode = str => Buffer.from(str, 'base64').toString('utf8');

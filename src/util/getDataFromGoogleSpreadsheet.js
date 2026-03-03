@@ -1,10 +1,10 @@
-const getGoogleSheetIdFromUrl = require("../util/getGoogleSheetIdFromUrl");
-const chalk = require('chalk');
-const { GoogleSpreadsheet } = require('google-spreadsheet');
-const isGoogleSpreadsheetUrl = require('./isGoogleSpreadsheetUrl');
-const getOAuth2Client = require('./getOAuth2Client');
+import getGoogleSheetIdFromUrl from './getGoogleSheetIdFromUrl.js';
+import chalk from 'chalk';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import isGoogleSpreadsheetUrl from './isGoogleSpreadsheetUrl.js';
+import getOAuth2Client from './getOAuth2Client.js';
 
-module.exports = async function getDataFromGoogleSpreadsheet(contentSource) {
+export default async function getDataFromGoogleSpreadsheet(contentSource) {
   const cacheSpreadSheets = {};
   const id = getGoogleSheetIdFromUrl(contentSource.url);
 

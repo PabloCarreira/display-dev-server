@@ -1,6 +1,6 @@
-const getRichmediaRC = require('./getRichmediaRC');
-const glob = require('glob-promise');
-const doesNestedExist = require('./doesNestedExists');
+import getRichmediaRC from './getRichmediaRC.js';
+import glob from 'glob-promise';
+import doesNestedExist from './doesNestedExists.js';
 
 /**
  * @description will search for files with a pattern.
@@ -8,7 +8,7 @@ const doesNestedExist = require('./doesNestedExists');
  * @param {Array<string>} patterns ['data.settings.entry.js', 'data.settings.entry.html']
  * @return {Array<{data: (void|never), location: string}[]>}
  */
-module.exports = async function findRichmediaRC(globQuery = '**/.richmediarc', patterns = []) {
+export default async function findRichmediaRC(globQuery = '**/.richmediarc', patterns = []) {
   const files = await glob(globQuery, { ignore: ['./node_modules/**/.richmediarc'] });
   let result = await Promise.all(
     files.map(async function(location) {

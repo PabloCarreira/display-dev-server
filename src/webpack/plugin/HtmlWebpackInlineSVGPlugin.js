@@ -1,13 +1,13 @@
 'use strict'
 
-const path = require('path')
-const chalk = require('chalk')
-const parse5 = require('parse5')
-const _ = require('lodash')
-const fs = require('fs')
-const SVGO = require('svgo')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const axios = require('axios')
+import path from 'path';
+import chalk from 'chalk';
+import * as parse5 from 'parse5';
+import _ from 'lodash';
+import fs from 'fs';
+import SVGO from 'svgo';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import axios from 'axios';
 
 
 /**
@@ -587,4 +587,4 @@ class HtmlWebpackInlineSVGPlugin {
 
 }
 
-module.exports = HtmlWebpackInlineSVGPlugin
+export default HtmlWebpackInlineSVGPlugin;

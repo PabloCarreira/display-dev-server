@@ -1,4 +1,2 @@
-module.exports = {
-  DEVELOPMENT: 'development',
-  PRODUCTION: 'production',
-};
+export const DEVELOPMENT = 'development';
+export const PRODUCTION = 'production';

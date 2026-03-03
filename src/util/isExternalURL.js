@@ -4,4 +4,4 @@ function isExternalURL(url) {
   return reg.test(url);
 }
 
-module.exports = isExternalURL;
+export default isExternalURL;

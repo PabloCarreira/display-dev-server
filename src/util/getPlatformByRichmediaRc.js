@@ -1,4 +1,4 @@
-module.exports = function getPlatformByRichmediaRc(richmediaRc) {
+export default function getPlatformByRichmediaRc(richmediaRc) {
   if (!!richmediaRc.monet) {
     return 'monet';
   } else if (!!richmediaRc.doubleclick) {

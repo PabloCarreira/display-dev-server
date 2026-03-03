@@ -1,19 +1,21 @@
-const webpack = require('webpack');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const express = require('express');
-
-const createConfigByRichmediarcList = require('./config/createConfigByRichmediarcList')
-
-const getNameFromLocation = require('../util/getNameFromLocation');
-
-/**
- *
- * @param {Array<{settings: {location, data}}>} configs
- * @param {{}} options
- * @param {number} port
- */
+// devSubServer.cjs — MUST stay CommonJS (used by worker-farm via child_process.fork)
 module.exports = async function devSubServer({configs, options, port}, cb) {
+  const [
+    { default: webpack },
+    { default: webpackHotMiddleware },
+    { default: webpackDevMiddleware },
+    { default: express },
+    { default: createConfigByRichmediarcList },
+    { default: getNameFromLocation },
+  ] = await Promise.all([
+    import('webpack'),
+    import('webpack-hot-middleware'),
+    import('webpack-dev-middleware'),
+    import('express'),
+    import('./config/createConfigByRichmediarcList.js'),
+    import('../util/getNameFromLocation.js'),
+  ]);
+
   const webpackConfigList = await createConfigByRichmediarcList(configs, options);
   const settingsList = configs;
 
@@ -21,7 +23,7 @@ module.exports = async function devSubServer({configs, options, port}, cb) {
 
   // for loop to make webpacks run 1 at a time, we're anyway in parallel
   for (let index = 0; index < webpackConfigList.length; index++) {
-    const config = webpackConfigList[index]
+    const config = webpackConfigList[index];
 
     const hmrPath = '__webpack_hmr';
     const name = getNameFromLocation(settingsList[index].location);
@@ -48,9 +50,9 @@ module.exports = async function devSubServer({configs, options, port}, cb) {
           path: `/${name}/${hmrPath}`,
         }),
       );
-    })
+    });
 
-    process.send('increment')
+    process.send('increment');
   }
 
   app.listen(port, () => {});

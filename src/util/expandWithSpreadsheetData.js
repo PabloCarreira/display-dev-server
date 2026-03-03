@@ -1,10 +1,10 @@
-const chalk = require("chalk");
-const extendObject = require("./extendObject");
-const createObjectFromJSONPath = require("./createObjectFromJSONPath");
-const crypto = require("crypto");
-const getDataFromGoogleSpreadsheet = require("./getDataFromGoogleSpreadsheet");
+import chalk from 'chalk';
+import extendObject from './extendObject.js';
+import createObjectFromJSONPath from './createObjectFromJSONPath.js';
+import crypto from 'crypto';
+import getDataFromGoogleSpreadsheet from './getDataFromGoogleSpreadsheet.js';
 
-module.exports = async function expandWithSpreadsheetData(configs, mode) {
+export default async function expandWithSpreadsheetData(configs, mode) {
   // add support for google sheets.
   // detect if contentSource is available in
 

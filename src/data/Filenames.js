@@ -1,4 +1,2 @@
-module.exports = {
-  RC: '.oauthrc',
-  GITIGNORE: '.gitignore',
-};
+export const RC = '.oauthrc';
+export const GITIGNORE = '.gitignore';

@@ -1,14 +1,16 @@
-const fs = require("fs-extra");
-const path = require("path");
-const archiver = require("archiver");
-const globPromise = require("glob-promise");
-const getNameFromLocation = require("../util/getNameFromLocation");
-const htmlParser = require("node-html-parser");
-const chalk = require("chalk");
-const ffmpeg = require('fluent-ffmpeg');
-const { imageSize } = require('image-size');
+import fs from 'fs-extra';
+import path from 'path';
+import archiver from 'archiver';
+import globPromise from 'glob-promise';
+import getNameFromLocation from '../util/getNameFromLocation.js';
+import htmlParser from 'node-html-parser';
+import chalk from 'chalk';
+import ffmpeg from 'fluent-ffmpeg';
+import { imageSize } from 'image-size';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-module.exports = async function buildPreview(result, qualities, outputDir) {
+export default async function buildPreview(result, qualities, outputDir) {
   const start = Date.now()
   
   // find all ads in directory

@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-module.exports = function isFile(val) {
+export default function isFile(val) {
   if (fs.existsSync(val) && fs.statSync(val).isFile()) {
     return true;
   } else {

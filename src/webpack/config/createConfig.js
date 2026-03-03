@@ -1,26 +1,25 @@
-const path = require("path");
-const fs = require("fs");
-const webpack = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const VirtualModulesPlugin = require("webpack-virtual-modules");
-
-const sanitizeFilename = require("sanitize-filename");
-
-const WriteFilePlugin = require("../plugin/WriteFilePlugin");
-const ZipFilesPlugin = require("../plugin/ZipFilesPlugin");
-const OptimizeBundleToFilesizePlugin = require("../plugin/OptimizeBundleToFilesizePlugin");
-const CopyFilesPlugin = require("../plugin/CopyFilesPlugin");
-const HtmlWebpackInlineSVGPlugin = require("../plugin/HtmlWebpackInlineSVGPlugin");
-
-const DevEnum = require("../../data/DevEnum");
-const isFile = require("../../util/isFile");
-const isExternalURL = require("../../util/isExternalURL");
-const getRichmediaRCSync = require("../../util/getRichmediaRCSync");
-const parsePlaceholders = require("../../util/parsePlaceholders");
-const flattenObjectToCSSVars = require("../../util/flattenObjectToCSSVars");
-const getOptimisationsFromConfig = require("../../util/options/getOptimisationsFromConfig");
-const addConfigsAsWebpackDependencies = require("../../util/addConfigsAsWebpackDependencies");
+import path from 'path';
+import fs from 'fs';
+import webpack from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import VirtualModulesPlugin from 'webpack-virtual-modules';
+import sanitizeFilename from 'sanitize-filename';
+import WriteFilePlugin from '../plugin/WriteFilePlugin.js';
+import ZipFilesPlugin from '../plugin/ZipFilesPlugin.js';
+import OptimizeBundleToFilesizePlugin from '../plugin/OptimizeBundleToFilesizePlugin.js';
+import CopyFilesPlugin from '../plugin/CopyFilesPlugin.js';
+import HtmlWebpackInlineSVGPlugin from '../plugin/HtmlWebpackInlineSVGPlugin.js';
+import * as DevEnum from '../../data/DevEnum.js';
+import isFile from '../../util/isFile.js';
+import isExternalURL from '../../util/isExternalURL.js';
+import getRichmediaRCSync from '../../util/getRichmediaRCSync.js';
+import parsePlaceholders from '../../util/parsePlaceholders.js';
+import flattenObjectToCSSVars from '../../util/flattenObjectToCSSVars.js';
+import getOptimisationsFromConfig from '../../util/options/getOptimisationsFromConfig.js';
+import addConfigsAsWebpackDependencies from '../../util/addConfigsAsWebpackDependencies.js';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nodeModules = `${path.resolve(__dirname, "../../../node_modules")}/`;
 
@@ -35,7 +34,7 @@ const nodeModules = `${path.resolve(__dirname, "../../../node_modules")}/`;
  * @param {boolean} data.options.stats
  * @return {{mode: string, entry: *[], output: {path: *, filename: string}, externals: {TweenLite: string, TweenMax: string, TimelineLite: string, TimelineMax: string, Enabler: string, Monet: string}, resolve: {modules: string[], alias: {vendor: string}}, resolveLoader: {modules: string[], symlinks: boolean}, module: {rules: *[]}, plugins: *[], stats: {colors: boolean}, devtool: string}}
  */
-module.exports = function createConfig({
+export default function createConfig({
   richmediarc,
   richmediarcFilepath,
   outputPath,

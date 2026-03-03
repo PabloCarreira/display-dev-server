@@ -1,15 +1,14 @@
-const loaderUtils = require('loader-utils');
-const subsetFont = require('subset-font');
-const getRichmediaRC = require('../../util/getRichmediaRC');
-const getObjectByString = require('../../util/getObjectByString');
-const path = require('path');
-const fs = require('fs-extra');
-const chalk = require('chalk');
+import subsetFont from 'subset-font';
+import getRichmediaRC from '../../util/getRichmediaRC.js';
+import getObjectByString from '../../util/getObjectByString.js';
+import path from 'path';
+import fs from 'fs-extra';
+import chalk from 'chalk';
 // const get = require('lodash.get');
 
-module.exports = async function (content) {
+export default async function (content) {
   const callback = this.async();
-  const options = loaderUtils.getOptions(this);
+  const options = this.getOptions();
   const loaderContext = this;
   let {configFilepath, config} = options;
   let glyphs = [];
@@ -58,4 +57,4 @@ module.exports = async function (content) {
   }
 };
 
-module.exports.raw = true;
+export const raw = true;

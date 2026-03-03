@@ -3,7 +3,7 @@
  * @param richmediarc
  * @return {{css: boolean, javascript: boolean, html: boolean, image: boolean}}
  */
-module.exports = function getOptimisationsFromConfig(richmediarc) {
+export default function getOptimisationsFromConfig(richmediarc) {
   let result = {
     css: richmediarc.settings?.optimizations?.css || true,
     js: richmediarc.settings?.optimizations?.js || true,

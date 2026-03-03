@@ -1,6 +1,8 @@
-const handlebars = require('handlebars');
-const fs = require('fs-extra');
-const path = require('path');
+import handlebars from 'handlebars';
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let prom;
 
@@ -12,7 +14,7 @@ handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
  *
  * @return {Promise<HandlebarsTemplateDelegate<T>>}
  */
-module.exports = function getPreviewTemplate() {
+export default function getPreviewTemplate() {
   if (!prom) {
     prom = Promise.resolve(true).then(
       () =>

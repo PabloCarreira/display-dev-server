@@ -1,8 +1,8 @@
-const globPromise = require("glob-promise")
-const fsp = require('fs/promises')
-const chalk = require("chalk")
+import globPromise from 'glob-promise';
+import fsp from 'fs/promises';
+import chalk from 'chalk';
 
-module.exports = async function() {
+export default async function() {
   const start = Date.now()
 
   const gs_files = await globPromise("**/.googlesheet*", { ignore: ['node_modules/**', 'build/**'] })

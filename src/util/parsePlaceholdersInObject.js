@@ -1,5 +1,5 @@
-const leafs = require('./leafs');
-const parsePlaceholders = require('./parsePlaceholders');
+import leafs from './leafs.js';
+import parsePlaceholders from './parsePlaceholders.js';
 
 /**
  *
@@ -14,4 +14,4 @@ function parsePlaceholdersInObject(objectSource, model) {
   return objectSource;
 }
 
-module.exports = parsePlaceholdersInObject;
+export default parsePlaceholdersInObject;

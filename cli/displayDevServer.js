@@ -1,11 +1,13 @@
 #! /usr/bin/env node
 
-const displayDevServer = require('../src/index');
-// const jsonParseDeep = require('./src/util/jsonParseDeep');
-const { program } = require('commander');
-const chalk = require('chalk');
-const packageJson = require('../package.json');
-const base64 = require("../src/util/base64");
+import displayDevServer from '../src/index.js';
+import { program } from 'commander';
+import chalk from 'chalk';
+import * as base64 from '../src/util/base64.js';
+import { createRequire } from 'module';
+
+const _require = createRequire(import.meta.url);
+const packageJson = _require('../package.json');
 
 console.log(`Welcome to the ${chalk.green.bold(`Display.Monks Development Server`)} v${packageJson.version}`);
 
@@ -23,15 +25,11 @@ program
 
 const options = program.opts();
 
-(async () => {
+await displayDevServer({
+  ...options,
+  choices: options.choices ? JSON.parse(base64.decode(options.choices)) : null,
+});
 
-  await displayDevServer({
-    ...options,
-    choices: options.choices ? JSON.parse(base64.decode(options.choices)) : null,
-  })
-
-  console.log(`${chalk.green('✔')} done`);
-
-})();
+console.log(`${chalk.green('✔')} done`);
 
 

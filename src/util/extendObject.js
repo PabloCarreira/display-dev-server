@@ -18,4 +18,4 @@ function extendObject (target) {
     return target;
 }
 
-module.exports = extendObject;
+export default extendObject;

@@ -1,12 +1,12 @@
-const getWebpackConfigs = require("./webpack/getWebpackConfigs");
-const devServer = require("./webpack/devServer");
-const devServerParallel = require("./webpack/devServerParallel");
-const buildFiles = require("./webpack/buildFiles");
-const buildFilesParallel = require("./webpack/buildFilesParallel");
-const buildPreview = require("./webpack/buildPreview");
-const deleteAllGooglesheetFiles = require("./util/deleteAllGooglesheetFiles");
+import getWebpackConfigs from './webpack/getWebpackConfigs.js';
+import devServer from './webpack/devServer.js';
+import devServerParallel from './webpack/devServerParallel.js';
+import buildFiles from './webpack/buildFiles.js';
+import buildFilesParallel from './webpack/buildFilesParallel.js';
+import buildPreview from './webpack/buildPreview.js';
+import deleteAllGooglesheetFiles from './util/deleteAllGooglesheetFiles.js';
 
-module.exports = async function (options) {
+export default async function (options) {
   // {mode = "development", glob = "./**/.richmediarc*", choices = null, stats = null, outputDir = "./build", configOverride = {}}
   let {mode, glob, choices, stats, outputDir, skipBuild, skipPreview, parallel} = options;
 

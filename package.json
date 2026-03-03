@@ -6,8 +6,9 @@
     "preview-dev": "cd ./src/preview && npm run dev",
     "preview-build": "cd ./src/preview && npm run build"
   },
+  "type": "module",
   "engines": {
-    "node": ">= 16",
+    "node": ">= 18",
     "npm": ">= 8"
   },
   "bin": {
