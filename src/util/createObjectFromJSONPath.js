@@ -5,7 +5,8 @@
  * @return {obj}
  */
 function createObjectFromJSONPath(key, value) {
-    var result = object = {};
+    var object = {};
+    var result = object;
     var arr = key.split('.');
     for(var i = 0; i < arr.length-1; i++) {
         object = object[arr[i]] = {};
