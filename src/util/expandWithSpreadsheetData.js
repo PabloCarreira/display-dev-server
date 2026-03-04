@@ -76,7 +76,8 @@ export default async function expandWithSpreadsheetData(configs, mode) {
           return staticRowObject;
         });
 
-        cacheSpreadSheets[JSON.stringify(({ url, tabName, apiKey } = contentSource))] = {
+        const { url, tabName, apiKey } = contentSource;
+        cacheSpreadSheets[JSON.stringify({ url, tabName, apiKey })] = {
           spreadsheetData,
           staticRowObjects,
         };

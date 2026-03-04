@@ -159,7 +159,8 @@ ${chalk.grey.bold('-------------------------------------------------------')}
           return staticRowObject
         })
   
-        cacheSpreadSheets[JSON.stringify({ url, tabName, apiKey } = contentSource)] = {
+        const { url, tabName, apiKey } = contentSource;
+        cacheSpreadSheets[JSON.stringify({ url, tabName, apiKey })] = {
           spreadsheetData,
           staticRowObjects
         }
