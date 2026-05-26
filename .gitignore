@@ -15,3 +15,8 @@ node_modules/
 .VSCodeCounter
 
 ## only ignore in git
+plan-displayDevServerUpdate.prompt*
+
+## AI tools to ignore
+.agents
+skills-lock.json

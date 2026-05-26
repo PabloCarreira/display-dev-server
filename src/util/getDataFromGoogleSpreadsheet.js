@@ -13,21 +13,20 @@ export default async function getDataFromGoogleSpreadsheet(contentSource) {
   }
 
   console.log(`${chalk.green('✔')} gathering google sheets data for ${id}`);
-  cacheSpreadSheets[id] = new GoogleSpreadsheet(id);
 
+  let doc;
   if (contentSource.hasOwnProperty('apiKey') || process.env.displayMonks_googleApiKey) {
     console.log(`${chalk.green('✔')} using API key`);
     const apiKey = contentSource.apiKey || process.env.displayMonks_googleApiKey;
-    cacheSpreadSheets[id].useApiKey(apiKey);
+    doc = new GoogleSpreadsheet(id, { apiKey });
   } else {
     console.log(`${chalk.green('✔')} no API key found, defaulting to OAuth2`);
     const oAuth2Client = await getOAuth2Client();
-    cacheSpreadSheets[id].useOAuth2Client(oAuth2Client);
+    doc = new GoogleSpreadsheet(id, oAuth2Client);
   }
 
-  await cacheSpreadSheets[id].loadInfo();
-
-  const doc = cacheSpreadSheets[id];
+  cacheSpreadSheets[id] = doc;
+  await doc.loadInfo();
   let sheet;
 
   if (contentSource.tabName) {
@@ -53,8 +52,14 @@ export default async function getDataFromGoogleSpreadsheet(contentSource) {
   const rows = await sheet.getRows();
   const headerValues = sheet.headerValues;
 
+  // Returning rows mapping data directly since v4 provides it via row.get('key') or row.toObject().
+  // Assuming callers expect plain objects representing data rows rather than full GoogleSpreadsheetRow instances if backwards compatibility is strictly required. 
+  // For safety, providing both raw rows and row data mapped into standard objects compatible with prior behavior.
+  const mappedRows = rows.map(row => row.toObject());
+  Object.defineProperty(mappedRows, 'raw', { value: rows });
+
   return {
-    rows,
+    rows: mappedRows,
     headerValues
   };
 }

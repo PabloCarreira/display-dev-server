@@ -6,12 +6,12 @@ import util from 'util';
 import chalk from 'chalk';
 import open from 'open';
 import cliProgress from 'cli-progress';
+import { Worker } from 'worker_threads';
 import extendObject from '../util/extendObject.js';
 import createObjectFromJSONPath from '../util/createObjectFromJSONPath.js';
 import getDataFromGoogleSpreadsheet from '../util/getDataFromGoogleSpreadsheet.js';
 import removeTempRichmediaRcSync from '../util/removeTempRichmediaRcSync.js';
 import getNameFromLocation from '../util/getNameFromLocation.js';
-import workerFarm from 'worker-farm';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,23 +31,8 @@ export default async function devServer(configs, openLocation = true, options) {
   
   const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   progressBar.start(configs.length, 0);
-  
-  const devSubServer = workerFarm(
-    {
-      maxRetries: 0,
-      autoStart: true,
-      maxConcurrentCallsPerWorker: 1,
-      maxConcurrentWorkers: N_SUBSERVERS,
-      onChild: (subprocess) => {
-        subprocess.on('message', (message) => {
-          if (message == 'increment') {
-            progressBar.increment()
-          }
-        })
-      }
-    },
-    fileURLToPath(new URL('./devSubServer.cjs', import.meta.url))
-  );
+
+  const workerPath = new URL('./devSubServer.js', import.meta.url);
 
   const httpLocation = `http://localhost:${port}`;
 
@@ -65,6 +50,8 @@ ${chalk.grey.bold('-------------------------------------------------------')}
   app.listen(port, () => {});
 
   const ports = await new Promise(res => portfinder.getPorts(N_SUBSERVERS, {}, (err, ports) => res(ports)))
+
+  const workers = [];
 
   await Promise.all(settingsList
   // spread work evenly into chunks
@@ -88,7 +75,21 @@ ${chalk.grey.bold('-------------------------------------------------------')}
       })
     })
 
-    return new Promise(res => devSubServer({configs: chunk, options, port}, res))
+    return new Promise((resolve, reject) => {
+      const worker = new Worker(workerPath);
+      workers.push(worker);
+      worker.on('message', (msg) => {
+        if (msg.type === 'increment') {
+          progressBar.increment();
+        } else if (msg.type === 'done') {
+          resolve();
+        } else if (msg.type === 'error') {
+          reject(new Error(msg.message));
+        }
+      });
+      worker.on('error', reject);
+      worker.postMessage({ configs: chunk, options, port });
+    })
   }));
 
   progressBar.stop();
@@ -205,7 +206,7 @@ ${chalk.grey.bold('-------------------------------------------------------')}
     if (options.cleanup) removeTempRichmediaRcSync(configs);
     if (exitCode || exitCode === 0) console.log(exitCode);
     if (options.exit) process.exit();
-    workerFarm.end(devSubServer)
+    workers.forEach(w => w.terminate());
   }
 
   //do something when app is closing

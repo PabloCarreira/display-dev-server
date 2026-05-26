@@ -6,10 +6,17 @@ import chalk from 'chalk';
 import * as base64 from '../src/util/base64.js';
 import { createRequire } from 'module';
 
+import fs from 'fs';
+
 const _require = createRequire(import.meta.url);
 const packageJson = _require('../package.json');
 
+const chalkPkg = JSON.parse(fs.readFileSync(new URL('../node_modules/chalk/package.json', import.meta.url), 'utf8'));
+const inquirerPkg = JSON.parse(fs.readFileSync(new URL('../node_modules/inquirer/package.json', import.meta.url), 'utf8'));
+const openPkg = JSON.parse(fs.readFileSync(new URL('../node_modules/open/package.json', import.meta.url), 'utf8'));
+
 console.log(`Welcome to the ${chalk.green.bold(`Display.Monks Development Server`)} v${packageJson.version}`);
+console.log(chalk.gray(`[Deps] chalk: v${chalkPkg.version} | inquirer: v${inquirerPkg.version} | open: v${openPkg.version}`));
 
 program
   .version(packageJson.version)

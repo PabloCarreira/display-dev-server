@@ -44,4 +44,4 @@
 | webpack-dev-middleware | Dev asset serving | [`devServer`](src/webpack/devServer.js), [`devSubServer`](src/webpack/devSubServer.js) |
 | webpack-hot-middleware | HMR in dev | [`devServer`](src/webpack/devServer.js), [`devSubServer`](src/webpack/devSubServer.js) |
 | webpack-virtual-modules | Virtual module injection | [`createConfig`](src/webpack/config/createConfig.js) |
-| worker-farm | Parallel builds | [`buildFilesParallel`](src/webpack/buildFilesParallel.js), [`devServerParallel`](src/webpack/devServerParallel.js) |
+| worker_threads (Node built-in) | Parallel builds | [`buildFilesParallel`](src/webpack/buildFilesParallel.js), [`devServerParallel`](src/webpack/devServerParallel.js) |
