@@ -258,7 +258,7 @@ export default function createConfig({
               },
             ];
 
-            if (mode === DevEnum.PRODUCTION && (optimizations.image && !richmediarc.settings.optimizeToFileSize)) {
+            if (mode === DevEnum.PRODUCTION && optimizations.image && !richmediarc.settings.optimizeToFileSize) {
               // don't optimize images if optimizeToFileSize is set to true
               imageLoadersArray.push({
                 loader: path.resolve(path.join(__dirname, "../loader/ImageOptimizeLoader.js")),
@@ -335,7 +335,7 @@ export default function createConfig({
         "node_modules/richmediaconfig": `module.exports = "DUDE"`,
       }),
     ],
-    stats: 'errors-warnings',
+    stats: "errors-warnings",
     devtool,
   };
 
@@ -353,7 +353,6 @@ export default function createConfig({
   }
 
   if (mode === DevEnum.PRODUCTION && richmediarc.settings.type === "flashtalking") {
-
     console.log("found flashtalking ad");
 
     const outputString = `FT.manifest({

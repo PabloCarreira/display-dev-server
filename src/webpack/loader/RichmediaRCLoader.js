@@ -15,7 +15,7 @@ export default function RichmediaRCLoader(data) {
   const options = this.getOptions();
   const loaderContext = this;
 
-  const {configFilepath, config} = options;
+  const { configFilepath, config } = options;
 
   addConfigsAsWebpackDependencies(configFilepath, loaderContext); //recursively add richmediarc and sharedrc files as dependencies for webpack
 
@@ -25,8 +25,8 @@ export default function RichmediaRCLoader(data) {
     return getRichmediaRC(configFilepath);
   });
 
-  prom.then(data => {
-    data = typeof data === 'string' ? JSON.parse(data) : data;
+  prom.then((data) => {
+    data = typeof data === "string" ? JSON.parse(data) : data;
     data = JSON.parse(JSON.stringify(data));
 
     let ruuid = Date.now();
@@ -53,7 +53,7 @@ export default function RichmediaRCLoader(data) {
     if (data && data.settings) {
       leafs(data.settings, (value, obj, name) => {
         if (isFile(value) && !isExternalURL(value)) {
-          obj[name] = "./" + path.basename(value)
+          obj[name] = "./" + path.basename(value);
         }
       });
     }
@@ -62,8 +62,8 @@ export default function RichmediaRCLoader(data) {
     if (data?.settings?.contentSource) delete data.settings.contentSource;
 
     data = JSON.stringify(data)
-      .replace(/\u2028/g, '\\u2028')
-      .replace(/\u2029/g, '\\u2029');
+      .replace(/\u2028/g, "\\u2028")
+      .replace(/\u2029/g, "\\u2029");
 
     data = replaceItems.reduce((prev, item) => {
       prev = prev.replace(item.key, item.value);
